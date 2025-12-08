@@ -39,7 +39,7 @@ map('n', '<Esc>', '<cmd>nohlsearch<CR>')
 vim.pack.add({
 	{ src = "https://github.com/echasnovski/mini.pick" },
 	{ src = "https://github.com/stevearc/oil.nvim" },
-	{ src = "https://github.com/nvim-treesitter/nvim-treesitter" },
+	{ src = "https://github.com/nvim-treesitter/nvim-treesitter", version = 'main' },
 	{ src = "https://github.com/catppuccin/nvim" },
 })
 vim.cmd("colorscheme catppuccin")
@@ -52,9 +52,7 @@ require "nvim-treesitter.configs".setup({
 	highlight = { enable = true }
 })
 
-vim.lsp.enable({ "lua_ls" })
-vim.lsp.config("lua_ls", {
-})
+vim.lsp.enable({ "lua_ls", "html", "gopls" })
 
 
 vim.api.nvim_create_autocmd('LspAttach', {
