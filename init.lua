@@ -33,8 +33,15 @@ map('n', '<leader>lf', vim.lsp.buf.format)
 map('n', '<leader>f', ":Pick files<CR>")
 map('n', '<leader>h', ":Pick help<CR>")
 map('n', '<leader>e', ":Oil<CR>")
-
+map('i', '<C- >', vim.lsp.completion.get)
 map('n', '<Esc>', '<cmd>nohlsearch<CR>')
+
+vim.diagnostic.config({
+	virtual_text = false,
+	virtual_lines = { current_line = true }
+})
+
+
 
 vim.pack.add({
 	{ src = "https://github.com/echasnovski/mini.pick" },
@@ -48,11 +55,11 @@ vim.cmd("hi statusline guibg=NONE")
 require "mini.pick".setup()
 require "oil".setup()
 require "nvim-treesitter.configs".setup({
-	ensure_installed = {"lua", "go"},
+	ensure_installed = { "lua", "go" },
 	highlight = { enable = true }
 })
 
-vim.lsp.enable({ "lua_ls", "html", "gopls" })
+vim.lsp.enable({ "lua_ls", "html", "gopls", "vue_ls" })
 
 
 vim.api.nvim_create_autocmd('LspAttach', {
@@ -66,9 +73,9 @@ vim.api.nvim_create_autocmd('LspAttach', {
 vim.cmd("set completeopt+=noselect")
 
 vim.api.nvim_create_autocmd('TextYankPost', {
-  desc = 'Highlight when yanking (copying) text',
-  group = vim.api.nvim_create_augroup('kickstart-highlight-yank', { clear = true }),
-  callback = function()
-    vim.hl.on_yank()
-  end,
+	desc = 'Highlight when yanking (copying) text',
+	group = vim.api.nvim_create_augroup('kickstart-highlight-yank', { clear = true }),
+	callback = function()
+		vim.hl.on_yank()
+	end,
 })
